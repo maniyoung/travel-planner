@@ -12,6 +12,7 @@
     --accent: #f59e0b;
     --success: #10b981;
     --danger: #ef4444;
+    --purple: #7c3aed;
     --gray-50: #f9fafb;
     --gray-100: #f3f4f6;
     --gray-200: #e5e7eb;
@@ -24,17 +25,13 @@
     --radius: 12px;
     --shadow: 0 4px 24px rgba(0,0,0,0.08);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
     background: var(--gray-50);
     color: var(--gray-800);
     min-height: 100vh;
   }
-
-  /* ── Layout ── */
   .app-header {
     background: white;
     border-bottom: 1px solid var(--gray-200);
@@ -46,355 +43,145 @@
     top: 0;
     z-index: 100;
   }
-  .app-header h1 { font-size: 18px; font-weight: 700; color: var(--gray-800); }
-  .app-header .badge {
-    background: var(--primary-light);
-    color: var(--primary);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
+  .app-header h1 { font-size: 18px; font-weight: 700; }
+  .badge { background: var(--primary-light); color: var(--primary); font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+  .main { max-width: 780px; margin: 0 auto; padding: 28px 16px 80px; }
 
-  .main { max-width: 760px; margin: 0 auto; padding: 32px 16px 80px; }
-
-  /* ── Progress ── */
-  .progress-bar {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 32px;
-    background: white;
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    box-shadow: var(--shadow);
-    overflow-x: auto;
-  }
-  .step-dot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-    min-width: 60px;
-    cursor: pointer;
-  }
-  .step-dot .circle {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid var(--gray-300);
-    background: white;
-    color: var(--gray-400);
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    position: relative;
-    z-index: 1;
-  }
+  /* Progress */
+  .progress-bar { display: flex; align-items: center; margin-bottom: 28px; background: white; border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow); overflow-x: auto; gap: 0; }
+  .step-dot { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; min-width: 58px; cursor: pointer; }
+  .step-dot .circle { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--gray-300); background: white; color: var(--gray-400); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: all .2s; }
   .step-dot.active .circle { border-color: var(--primary); background: var(--primary); color: white; }
   .step-dot.done .circle { border-color: var(--success); background: var(--success); color: white; }
   .step-dot .label { font-size: 11px; color: var(--gray-500); text-align: center; white-space: nowrap; }
   .step-dot.active .label { color: var(--primary); font-weight: 600; }
   .step-dot.done .label { color: var(--success); }
-  .step-connector {
-    height: 2px;
-    flex: 1;
-    background: var(--gray-200);
-    margin-bottom: 18px;
-    min-width: 12px;
-  }
+  .step-connector { height: 2px; flex: 1; background: var(--gray-200); margin-bottom: 18px; min-width: 10px; }
   .step-connector.done { background: var(--success); }
 
-  /* ── Card ── */
-  .card {
-    background: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 28px;
-    margin-bottom: 20px;
-    animation: fadeIn 0.25s ease;
-  }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  /* Card */
+  .card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; margin-bottom: 18px; animation: fadeIn .22s ease; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+  .card-title { font-size: 19px; font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+  .card-desc { font-size: 13px; color: var(--gray-500); margin-bottom: 22px; }
 
-  .card-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* Form */
+  .form-group { margin-bottom: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 5px; }
+  label .opt { font-weight: 400; color: var(--gray-400); margin-left: 4px; }
+  input[type=text], input[type=date], input[type=time], input[type=number], textarea, select {
+    width: 100%; padding: 9px 13px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+    font-size: 14px; color: var(--gray-800); transition: border-color .15s; background: white; font-family: inherit;
   }
-  .card-desc { font-size: 14px; color: var(--gray-500); margin-bottom: 24px; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); }
+  textarea { resize: vertical; min-height: 70px; }
+  .hint { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
 
-  /* ── Form ── */
-  .form-group { margin-bottom: 18px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gray-700);
-    margin-bottom: 6px;
-  }
-  label .optional { font-weight: 400; color: var(--gray-400); margin-left: 4px; }
-  input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--gray-800);
-    transition: border-color 0.15s;
-    background: white;
-    font-family: inherit;
-  }
-  input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-  textarea { resize: vertical; min-height: 80px; }
-
-  .hint { font-size: 12px; color: var(--gray-400); margin-top: 5px; }
-
-  /* ── Buttons ── */
-  .btn {
-    padding: 11px 22px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-  }
+  /* Buttons */
+  .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; font-family: inherit; }
   .btn-primary { background: var(--primary); color: white; }
   .btn-primary:hover { background: var(--primary-dark); }
   .btn-outline { background: white; color: var(--gray-700); border: 1.5px solid var(--gray-200); }
   .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-  .btn-danger-outline { background: white; color: var(--danger); border: 1.5px solid var(--danger); }
-  .btn-danger-outline:hover { background: #fef2f2; }
+  .btn-ghost { background: none; border: none; color: var(--gray-500); cursor: pointer; font-size: 13px; }
+  .btn-ghost:hover { color: var(--primary); }
   .btn-success { background: var(--success); color: white; }
   .btn-success:hover { background: #059669; }
-  .btn-sm { padding: 7px 14px; font-size: 13px; }
+  .btn-purple { background: var(--purple); color: white; }
+  .btn-purple:hover { background: #6d28d9; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-xs { padding: 4px 9px; font-size: 11px; border-radius: 6px; }
+  .btn-row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--gray-100); }
+  .add-btn { display: flex; align-items: center; gap: 8px; border: 2px dashed var(--gray-300); background: white; border-radius: 10px; padding: 13px; width: 100%; cursor: pointer; color: var(--gray-500); font-size: 14px; font-weight: 600; transition: all .15s; font-family: inherit; }
+  .add-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-  .btn-row {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid var(--gray-100);
-  }
+  /* Info boxes */
+  .info-box { background: var(--primary-light); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 11px 15px; font-size: 13px; color: var(--gray-700); margin-bottom: 16px; }
+  .warn-box { background: #fffbeb; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 11px 15px; font-size: 13px; color: var(--gray-700); margin-bottom: 16px; }
+  .success-box { background: #f0fdf4; border-left: 4px solid var(--success); border-radius: 0 8px 8px 0; padding: 11px 15px; font-size: 13px; color: var(--gray-700); margin-bottom: 16px; }
 
-  /* ── Place items ── */
-  .place-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
-
-  .place-item {
-    border: 1.5px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 16px;
-    background: var(--gray-50);
-    position: relative;
-  }
-  .place-item-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .place-name-badge {
-    background: var(--primary);
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 20px;
-    flex-shrink: 0;
-  }
-  .place-type-tag {
-    font-size: 12px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--gray-200);
-    color: var(--gray-600);
-    background: white;
-  }
-  .place-remove {
-    margin-left: auto;
-    background: none;
-    border: none;
-    color: var(--gray-400);
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
-    padding: 2px 6px;
-  }
+  /* Place cards */
+  .place-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .place-item { border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 14px; background: var(--gray-50); }
+  .place-item-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .place-name-badge { background: var(--primary); color: white; font-size: 12px; font-weight: 700; padding: 3px 11px; border-radius: 20px; }
+  .place-type-tag { font-size: 11px; padding: 2px 9px; border-radius: 20px; border: 1px solid var(--gray-200); color: var(--gray-600); background: white; }
+  .place-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 12px; color: var(--gray-500); }
+  .place-remove { margin-left: auto; background: none; border: none; color: var(--gray-400); cursor: pointer; font-size: 17px; padding: 2px 5px; }
   .place-remove:hover { color: var(--danger); }
 
-  .place-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .place-fields .full { grid-column: 1 / -1; }
+  /* Zone */
+  .zone-section { margin-bottom: 20px; }
+  .zone-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 2px solid var(--gray-200); }
+  .zone-label { font-size: 14px; font-weight: 700; color: var(--gray-700); }
+  .zone-count { background: var(--gray-200); color: var(--gray-600); font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 10px; }
 
-  /* ── Zone group ── */
-  .zone-section { margin-bottom: 24px; }
-  .zone-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--gray-200);
-  }
-  .zone-label {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--gray-700);
-  }
-  .zone-count {
-    background: var(--gray-200);
-    color: var(--gray-600);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-  }
+  /* Recommendation panel */
+  .rec-city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-bottom: 18px; }
+  .rec-city-btn { padding: 8px 6px; border: 1.5px solid var(--gray-200); border-radius: 8px; background: white; cursor: pointer; font-size: 12px; font-weight: 600; text-align: center; transition: all .15s; font-family: inherit; }
+  .rec-city-btn:hover, .rec-city-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+  .rec-place-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .rec-place-card { border: 1.5px solid var(--gray-200); border-radius: 9px; padding: 11px; cursor: pointer; transition: all .15s; position: relative; }
+  .rec-place-card:hover { border-color: var(--primary); }
+  .rec-place-card.selected { border-color: var(--primary); background: var(--primary-light); }
+  .rec-place-card .check { position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--gray-300); background: white; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+  .rec-place-card.selected .check { background: var(--primary); border-color: var(--primary); color: white; }
+  .rec-place-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; padding-right: 22px; }
+  .rec-place-meta { font-size: 11px; color: var(--gray-500); line-height: 1.6; }
 
-  /* ── Schedule output ── */
-  .schedule-wrapper { overflow-x: auto; }
-  .day-block {
-    margin-bottom: 28px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .day-header {
-    background: var(--primary);
-    color: white;
-    padding: 12px 18px;
-    font-weight: 700;
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .day-header .day-note { font-size: 12px; font-weight: 400; opacity: 0.85; }
+  /* Schedule */
+  .day-block { margin-bottom: 22px; border: 1.5px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+  .day-header { background: var(--primary); color: white; padding: 11px 16px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .day-note-tag { font-size: 11px; font-weight: 400; opacity: .85; }
+  .day-explanation { background: #f8faff; border-bottom: 1px solid var(--gray-100); padding: 10px 14px; }
+  .day-exp-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .day-exp-list li { font-size: 12px; color: var(--gray-600); }
+  .schedule-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--gray-100); }
+  .schedule-item:last-child { border-bottom: none; }
+  .schedule-item:hover { background: var(--gray-50); }
+  .sched-info { flex: 1; }
+  .sched-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .sched-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+  .sched-move { display: flex; gap: 4px; flex-shrink: 0; }
 
-  table { width: 100%; border-collapse: collapse; }
-  th {
-    background: var(--gray-50);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray-500);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 10px 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--gray-200);
-  }
-  td {
-    padding: 12px 14px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--gray-100);
-    vertical-align: top;
-  }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--gray-50); }
-
-  .time-cell { color: var(--gray-500); font-size: 13px; white-space: nowrap; font-weight: 600; }
-  .place-cell { font-weight: 600; }
-  .transport-cell { color: var(--gray-500); font-size: 13px; }
-  .menu-cell { color: var(--gray-600); font-size: 13px; }
-  .note-cell { color: var(--primary); font-size: 12px; }
-
-  .type-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin-left: 6px;
-  }
+  /* Type badges */
+  .type-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
   .type-식사 { background: #fef3c7; color: #92400e; }
   .type-카페 { background: #ecfdf5; color: #065f46; }
   .type-명소 { background: #eff6ff; color: #1e40af; }
   .type-쇼핑 { background: #fdf4ff; color: #7e22ce; }
   .type-숙소 { background: #f0fdf4; color: #166534; }
   .type-이동 { background: #f8fafc; color: #475569; }
+  .type-기타 { background: var(--gray-100); color: var(--gray-600); }
 
-  /* ── Tips section ── */
-  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .tip-card {
-    background: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 14px;
-  }
-  .tip-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--gray-700); }
-  .tip-card p, .tip-card li { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
-  .tip-card ul { padding-left: 16px; }
+  /* Output */
+  .output-summary { background: var(--gray-50); border-radius: 10px; padding: 15px; margin-bottom: 18px; font-size: 13px; }
+  .output-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; color: var(--gray-700); }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: var(--gray-50); font-size: 11px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--gray-200); }
+  td { padding: 11px 12px; font-size: 13px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .time-cell { color: var(--gray-500); font-size: 12px; white-space: nowrap; font-weight: 600; }
+  .place-cell { font-weight: 600; font-size: 13px; }
+  .booking-links { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .booking-btn { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
+  .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+  .tip-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 13px; }
+  .tip-card h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; color: var(--gray-700); }
+  .tip-card p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+  .export-row { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 
-  /* ── Alert / Info ── */
-  .info-box {
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--gray-700);
-    margin-bottom: 18px;
-  }
-  .warn-box {
-    background: #fffbeb;
-    border-left: 4px solid var(--accent);
-    border-radius: 0 8px 8px 0;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--gray-700);
-    margin-bottom: 18px;
-  }
-
-  /* ── Add place modal ── */
-  .add-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 2px dashed var(--gray-300);
-    background: white;
-    border-radius: 10px;
-    padding: 14px;
-    width: 100%;
-    cursor: pointer;
-    color: var(--gray-500);
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.15s;
-  }
-  .add-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-  /* ── Print / Export ── */
-  .export-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  /* ── Mobile ── */
   @media (max-width: 600px) {
-    .form-row { grid-template-columns: 1fr; }
-    .place-fields { grid-template-columns: 1fr; }
-    .tips-grid { grid-template-columns: 1fr; }
-    .card { padding: 18px; }
+    .form-row, .rec-place-grid, .tips-grid, .output-summary-grid { grid-template-columns: 1fr; }
+    .card { padding: 16px; }
     .btn-row { flex-wrap: wrap; }
   }
-
   @media print {
-    .app-header, .progress-bar, .btn-row, .export-row { display: none; }
+    .app-header, .progress-bar, .btn-row, .export-row, .sched-move { display: none; }
     .card { box-shadow: none; border: 1px solid var(--gray-200); break-inside: avoid; }
     body { background: white; }
   }
-
   .hidden { display: none !important; }
 </style>
 </head>
@@ -407,591 +194,655 @@
 </header>
 
 <main class="main">
-
-  <!-- Progress -->
   <div class="progress-bar" id="progressBar"></div>
-
-  <!-- Steps -->
   <div id="stepContainer"></div>
-
 </main>
 
 <script>
-// ══════════════════════════════════════════════
-//  State
-// ══════════════════════════════════════════════
-const state = {
-  currentStep: 0,
-  trip: {
-    destination: '',
-    startDate: '',
-    endDate: '',
-    departureTime: '',
-    arrivalTime: '',
-    returnDepartureTime: '',
-    returnArrivalTime: '',
-    accommodation: '',
-    transport: 'subway',
-    notes: ''
+// ═══════════════════════════════════════════════
+//  CITY DATA — 내장 추천 데이터셋
+// ═══════════════════════════════════════════════
+const CITY_DATA = {
+  '도쿄': {
+    emoji: '🗼', country: 'jp',
+    places: [
+      { name: '센소지', type: '명소', zone: '아사쿠사권', nearStation: '아사쿠사역 1번출구', duration: 90, bestTime: '오전 (9~12시)', menu: '나카미세 길거리 음식', needReservation: false, notes: '이른 아침 인파 적음' },
+      { name: '츠키지 시장', type: '식사', zone: '아사쿠사권', nearStation: '츠키지역 1번출구', duration: 90, bestTime: '오전 (9~12시)', menu: '참치덮밥, 연어덮밥, 계란말이', needReservation: false, notes: '월요일 일부 가게 휴무 확인' },
+      { name: '시부야 스크램블 교차로', type: '명소', zone: '시부야·하라주쿠권', nearStation: '시부야역 하치코 출구', duration: 60, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '야간이 가장 화려함' },
+      { name: '다케시타 거리', type: '쇼핑', zone: '시부야·하라주쿠권', nearStation: '하라주쿠역', duration: 90, bestTime: '오전 (9~12시)', menu: '크레이프', needReservation: false, notes: '주말 오후는 극도로 혼잡' },
+      { name: '메이지 신궁', type: '명소', zone: '시부야·하라주쿠권', nearStation: '하라주쿠역', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '' },
+      { name: '신주쿠 골든가이', type: '식사', zone: '신주쿠권', nearStation: '신주쿠역 동쪽출구', duration: 90, bestTime: '야간 (20시~)', menu: '이자카야 요리', needReservation: false, notes: '심야 분위기 최고' },
+      { name: '도쿄 도청 전망대', type: '명소', zone: '신주쿠권', nearStation: '도쿄도청앞역', duration: 60, bestTime: '야간 (20시~)', menu: '', needReservation: false, notes: '무료 입장, 야경 명소' },
+      { name: '팀랩 플래닛', type: '명소', zone: '긴자·팀랩권', nearStation: '신토요스역', duration: 120, bestTime: '오후 (14~17시)', menu: '', needReservation: true, notes: '사전 예약 필수 (공식 웹사이트)' },
+      { name: '긴자 쇼핑', type: '쇼핑', zone: '긴자·팀랩권', nearStation: '긴자역', duration: 120, bestTime: '낮 (12~14시)', menu: '', needReservation: false, notes: '고급 백화점·브랜드 집중' },
+      { name: '우에노 공원', type: '명소', zone: '우에노권', nearStation: '우에노역 공원출구', duration: 90, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '봄 벚꽃 명소' },
+      { name: '아메요코 시장', type: '쇼핑', zone: '우에노권', nearStation: '우에노역', duration: 60, bestTime: '낮 (12~14시)', menu: '길거리 음식', needReservation: false, notes: '' },
+      { name: '이케부쿠로 선샤인시티', type: '쇼핑', zone: '이케부쿠로권', nearStation: '이케부쿠로역 동쪽출구', duration: 120, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '포켓몬센터, 애니메 굿즈' },
+    ]
   },
-  places: [],  // { id, name, type, zone, address, nearStation, openTime, closeTime, duration, bestTime, menu, needReservation, reservationMethod, notes, confirmed }
-  schedule: [],  // [{ date, items: [...] }]
-  tips: {
-    weather: '',
-    currency: '',
-    transport: '',
-    language: '',
-    misc: ''
+  '오사카': {
+    emoji: '🦀', country: 'jp',
+    places: [
+      { name: '도톤보리', type: '식사', zone: '난바권', nearStation: '난바역', duration: 120, bestTime: '저녁 (17~20시)', menu: '다코야키, 오코노미야키, 구이 게', needReservation: false, notes: '야간 글리코상 조명 포토스팟' },
+      { name: '구로몬 시장', type: '식사', zone: '난바권', nearStation: '닛폰바시역', duration: 90, bestTime: '오전 (9~12시)', menu: '신선회, 간식', needReservation: false, notes: '오후 늦게는 가게 닫힘' },
+      { name: '신사이바시 쇼핑', type: '쇼핑', zone: '난바권', nearStation: '신사이바시역', duration: 120, bestTime: '낮 (12~14시)', menu: '', needReservation: false, notes: '드러그스토어 밀집' },
+      { name: '오사카성', type: '명소', zone: '오사카성권', nearStation: '오사카조코엔역', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '성내 박물관 포함 2시간 권장' },
+      { name: '유니버설 스튜디오 재팬', type: '명소', zone: 'USJ권', nearStation: 'USJ역', duration: 480, bestTime: '오전 (9~12시)', menu: '', needReservation: true, notes: '사전 티켓 구매 필수, 파크 개장 30분 전 도착' },
+      { name: '텐노지 동물원·공원', type: '명소', zone: '텐노지권', nearStation: '텐노지역', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '' },
+      { name: '나카자키초 카페 거리', type: '카페', zone: '우메다권', nearStation: '나카자키초역', duration: 90, bestTime: '오후 (14~17시)', menu: '블루보틀 커피, 로컬 카페', needReservation: false, notes: '힙스터 분위기, 빈티지 쇼핑도 가능' },
+      { name: '우메다 스카이빌딩', type: '명소', zone: '우메다권', nearStation: '우메다역', duration: 60, bestTime: '야간 (20시~)', menu: '', needReservation: false, notes: '공중정원 야경 명소' },
+    ]
+  },
+  '교토': {
+    emoji: '⛩️', country: 'jp',
+    places: [
+      { name: '후시미 이나리', type: '명소', zone: '후시미권', nearStation: '이나리역', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '이른 아침 방문 시 인파 적고 신비로운 분위기' },
+      { name: '기요미즈데라', type: '명소', zone: '히가시야마권', nearStation: '기요미즈미치 버스정류장', duration: 90, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '산넨자카·니넨자카 산책 함께 추천' },
+      { name: '산넨자카·니넨자카', type: '명소', zone: '히가시야마권', nearStation: '기요미즈미치 버스정류장', duration: 60, bestTime: '오전 (9~12시)', menu: '말차 아이스크림, 두부요리', needReservation: false, notes: '기요미즈데라와 세트 코스' },
+      { name: '아라시야마 대나무숲', type: '명소', zone: '아라시야마권', nearStation: '아라시야마역', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '아침 일찍 방문 시 조용한 분위기' },
+      { name: '텐류지', type: '명소', zone: '아라시야마권', nearStation: '아라시야마역', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '세계문화유산 정원' },
+      { name: '킨카쿠지 (금각사)', type: '명소', zone: '기타오지권', nearStation: '킨카쿠지미치 버스정류장', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '오전 방문 시 반영이 아름다움' },
+      { name: '니조성', type: '명소', zone: '교토 중심', nearStation: '니조죠마에역', duration: 90, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '봄 벚꽃, 가을 단풍 명소' },
+      { name: '기온 거리', type: '명소', zone: '히가시야마권', nearStation: '기온시조역', duration: 60, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '저녁에 마이코 행렬 목격 가능성 있음' },
+      { name: '니시키 시장', type: '식사', zone: '교토 중심', nearStation: '시조역', duration: 60, bestTime: '낮 (12~14시)', menu: '교토 두부, 절임류, 꼬치', needReservation: false, notes: '좁은 골목 시장, 도보 이동' },
+    ]
+  },
+  '제주': {
+    emoji: '🍊', country: 'kr',
+    places: [
+      { name: '성산 일출봉', type: '명소', zone: '동부권', nearStation: '성산항 버스정류장', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '일출 보려면 05:30 이전 도착 필요' },
+      { name: '만장굴', type: '명소', zone: '동부권', nearStation: '만장굴 버스정류장', duration: 90, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '세계문화유산, 내부 기온 낮아 겉옷 필요' },
+      { name: '섭지코지', type: '명소', zone: '동부권', nearStation: '섭지코지 버스정류장', duration: 60, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '드라마 촬영지, 유채꽃 시즌 봄' },
+      { name: '천지연 폭포', type: '명소', zone: '서귀포권', nearStation: '서귀포매일올레시장 버스정류장', duration: 60, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '야간 조명 연출도 아름다움' },
+      { name: '중문 색달해변', type: '명소', zone: '서귀포권', nearStation: '중문단지 버스정류장', duration: 90, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '수영 가능 (여름)' },
+      { name: '한라산 등반', type: '명소', zone: '한라산', nearStation: '성판악 탐방로', duration: 480, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '당일 코스, 체력 필요. 정상 등반은 12시 전 출발' },
+      { name: '애월 카페거리', type: '카페', zone: '서부권', nearStation: '애월리 버스정류장', duration: 90, bestTime: '오후 (14~17시)', menu: '오션뷰 카페', needReservation: false, notes: '바다뷰 카페 밀집' },
+      { name: '협재 해변', type: '명소', zone: '서부권', nearStation: '협재 버스정류장', duration: 90, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '에메랄드빛 물색 인스타 명소' },
+      { name: '흑돼지 거리', type: '식사', zone: '제주시권', nearStation: '제주시청 버스정류장', duration: 90, bestTime: '저녁 (17~20시)', menu: '제주 흑돼지 구이', needReservation: true, notes: '저녁 시간 대기 길어 예약 권장' },
+      { name: '동문시장 야시장', type: '식사', zone: '제주시권', nearStation: '동문시장 버스정류장', duration: 90, bestTime: '저녁 (17~20시)', menu: '빙떡, 고기국수, 한치물회', needReservation: false, notes: '금·토·일 야시장 운영 확인' },
+    ]
+  },
+  '부산': {
+    emoji: '🌊', country: 'kr',
+    places: [
+      { name: '해운대 해수욕장', type: '명소', zone: '해운대권', nearStation: '해운대역', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '여름 성수기 극도 혼잡' },
+      { name: '동백섬·누리마루', type: '명소', zone: '해운대권', nearStation: '동백역', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '' },
+      { name: '감천문화마을', type: '명소', zone: '사하권', nearStation: '토성역 환승 버스', duration: 90, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '오전 방문 시 사진 찍기 좋음' },
+      { name: '자갈치시장', type: '식사', zone: '남포동권', nearStation: '자갈치역', duration: 90, bestTime: '오전 (9~12시)', menu: '회덮밥, 장어구이, 꽃게', needReservation: false, notes: '' },
+      { name: '국제시장·깡통시장', type: '쇼핑', zone: '남포동권', nearStation: '자갈치역', duration: 60, bestTime: '낮 (12~14시)', menu: '씨앗호떡', needReservation: false, notes: '' },
+      { name: '광안리 해수욕장', type: '명소', zone: '광안리권', nearStation: '광안역', duration: 90, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '광안대교 야경이 압도적' },
+      { name: '해동 용궁사', type: '명소', zone: '기장권', nearStation: '해동용궁사 버스정류장', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '바다 위 절, 일출 명소' },
+      { name: '흰여울문화마을', type: '명소', zone: '영도권', nearStation: '남항동 버스정류장', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '절벽 위 바다뷰 골목길' },
+      { name: '서면 먹자골목', type: '식사', zone: '서면권', nearStation: '서면역', duration: 90, bestTime: '저녁 (17~20시)', menu: '돼지국밥, 밀면, 어묵', needReservation: false, notes: '' },
+    ]
+  },
+  '파리': {
+    emoji: '🗼', country: 'fr',
+    places: [
+      { name: '에펠탑', type: '명소', zone: '7구', nearStation: 'Trocadéro 역', duration: 120, bestTime: '야간 (20시~)', menu: '', needReservation: true, notes: '야간 점등(매시 정각 5분) 필수 관람. 입장권 사전 예매' },
+      { name: '루브르 박물관', type: '명소', zone: '1구', nearStation: 'Palais Royal 역', duration: 240, bestTime: '오전 (9~12시)', menu: '', needReservation: true, notes: '사전 예약 필수. 최소 4시간 이상 소요' },
+      { name: '몽마르트르 언덕', type: '명소', zone: '18구', nearStation: 'Abbesses 역', duration: 120, bestTime: '오전 (9~12시)', menu: '크레이프', needReservation: false, notes: '사크레쾨르 성당 포함' },
+      { name: '오르세 미술관', type: '명소', zone: '7구', nearStation: 'Musée d\'Orsay 역', duration: 180, bestTime: '오후 (14~17시)', menu: '', needReservation: true, notes: '인상파 컬렉션. 사전 예약 권장' },
+      { name: '마레 지구 산책', type: '쇼핑', zone: '3·4구', nearStation: 'Saint-Paul 역', duration: 120, bestTime: '낮 (12~14시)', menu: '팔라펠, 카페', needReservation: false, notes: '빈티지 쇼핑, 유대인 문화' },
+      { name: '베르사유 궁전', type: '명소', zone: '베르사유', nearStation: 'RER C 베르사유역', duration: 300, bestTime: '오전 (9~12시)', menu: '', needReservation: true, notes: '왕복 이동 2시간 포함. 하루 전일 코스' },
+      { name: '샹젤리제·개선문', type: '명소', zone: '8구', nearStation: 'Charles de Gaulle Étoile 역', duration: 90, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '저녁 산책 코스 최적' },
+      { name: '생제르망 카페', type: '카페', zone: '6구', nearStation: 'Saint-Germain-des-Prés 역', duration: 90, bestTime: '오전 (9~12시)', menu: '크루아상, 카페오레', needReservation: false, notes: '카페 드 플로르, 레 두 마고 등 역사적 카페' },
+    ]
+  },
+  '방콕': {
+    emoji: '🛕', country: 'th',
+    places: [
+      { name: '왓 프라깨우 (에메랄드 불상)', type: '명소', zone: '구시가지권', nearStation: '수상버스 타창 선착장', duration: 120, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '복장 규정 엄격: 무릎·어깨 덮어야 함. 낮에 더위 심함' },
+      { name: '왓 아룬 (새벽사원)', type: '명소', zone: '구시가지권', nearStation: '수상버스 왓 아룬 선착장', duration: 60, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '노을 때 강 건너 뷰가 절경' },
+      { name: '짜뚜짝 주말시장', type: '쇼핑', zone: '북부권', nearStation: 'Mo Chit BTS역', duration: 180, bestTime: '오전 (9~12시)', menu: '팟타이, 코코넛아이스크림', needReservation: false, notes: '토·일 오전만 운영. 더위 대비 필수' },
+      { name: '아이콘시암', type: '쇼핑', zone: '강변권', nearStation: '수상버스 아이콘시암 선착장', duration: 120, bestTime: '오후 (14~17시)', menu: '수상시장 내부 식당', needReservation: false, notes: '에어컨 완비 쇼핑몰, 더위 피하기 좋음' },
+      { name: '룸피니 공원', type: '명소', zone: '도심권', nearStation: 'Lumpini MRT역', duration: 60, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '이른 아침 조깅·요가하는 현지인 문화 체험' },
+      { name: '카오산 로드', type: '식사', zone: '구시가지권', nearStation: '버스 이용', duration: 90, bestTime: '야간 (20시~)', menu: '팟타이, 망고밥, 피시볼', needReservation: false, notes: '배낭여행자 거리, 야간 버스킹' },
+      { name: '마사지 거리', type: '기타', zone: '도심권', nearStation: 'Asok BTS역', duration: 120, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '타이 마사지 1시간 300~500바트' },
+      { name: '에라완 폭포 (당일치기)', type: '명소', zone: '근교', nearStation: '모칫 버스터미널 출발', duration: 480, bestTime: '오전 (9~12시)', menu: '', needReservation: false, notes: '방콕에서 3시간. 당일 코스 전일 배치' },
+    ]
+  },
+  '싱가포르': {
+    emoji: '🦁', country: 'sg',
+    places: [
+      { name: '마리나베이 샌즈 스카이파크', type: '명소', zone: '마리나베이', nearStation: 'Bayfront MRT역', duration: 90, bestTime: '야간 (20시~)', menu: '', needReservation: true, notes: '무한풀은 투숙객 전용. 전망대 입장권 사전 예매 권장' },
+      { name: '가든스 바이 더 베이', type: '명소', zone: '마리나베이', nearStation: 'Bayfront MRT역', duration: 180, bestTime: '저녁 (17~20시)', menu: '', needReservation: false, notes: '슈퍼트리 라이트쇼: 매일 19:45·20:45' },
+      { name: '리틀 인디아', type: '명소', zone: '리틀인디아', nearStation: 'Little India MRT역', duration: 90, bestTime: '오전 (9~12시)', menu: '인도 카레, 로티 프라타', needReservation: false, notes: '주말 오후 매우 혼잡' },
+      { name: '차이나타운 헤리티지', type: '명소', zone: '차이나타운', nearStation: 'Chinatown MRT역', duration: 90, bestTime: '낮 (12~14시)', menu: '딤섬, 바쿠테', needReservation: false, notes: '' },
+      { name: '센토사 유니버설 스튜디오', type: '명소', zone: '센토사', nearStation: '센토사 익스프레스', duration: 480, bestTime: '오전 (9~12시)', menu: '', needReservation: true, notes: '사전 티켓 구매. 개장 30분 전 도착' },
+      { name: '맥스웰 푸드 센터', type: '식사', zone: '차이나타운', nearStation: 'Chinatown MRT역', duration: 60, bestTime: '낮 (12~14시)', menu: '하이난 치킨라이스, 차퀴티아오', needReservation: false, notes: '점심 피크 시간 줄 길 수 있음' },
+      { name: '오차드 로드 쇼핑', type: '쇼핑', zone: '오차드', nearStation: 'Orchard MRT역', duration: 180, bestTime: '오후 (14~17시)', menu: '', needReservation: false, notes: '이온 오차드, 파라곤 등 면세점 밀집' },
+      { name: '클락 키 리버사이드', type: '식사', zone: '리버사이드', nearStation: 'Clarke Quay MRT역', duration: 120, bestTime: '야간 (20시~)', menu: '싱가포르 칠리크랩', needReservation: false, notes: '야간 강변 식사 분위기 최고' },
+    ]
   }
 };
 
-const STEPS = [
-  { id: 'trip',     label: '기본 정보' },
-  { id: 'places',   label: '방문지 입력' },
-  { id: 'details',  label: '상세 정보' },
-  { id: 'schedule', label: '일정 배치' },
-  { id: 'output',   label: '완성 일정표' }
-];
+// ═══════════════════════════════════════════════
+//  BOOKING LINKS
+// ═══════════════════════════════════════════════
+function getBookingLinks(place, destination) {
+  const q = encodeURIComponent(place.name);
+  const qFull = encodeURIComponent(place.name + ' ' + destination);
+  const links = [];
 
+  // 항상 포함
+  links.push({ label: '구글맵', url: `https://www.google.com/maps/search/?api=1&query=${qFull}`, bg: '#4285F4', fg: '#fff' });
+  links.push({ label: '네이버지도', url: `https://map.naver.com/p/search/${q}`, bg: '#03C75A', fg: '#fff' });
+
+  if (place.type === '명소') {
+    links.push({ label: 'Klook', url: `https://www.klook.com/ko/search/?query=${qFull}`, bg: '#FF5D1E', fg: '#fff' });
+    links.push({ label: 'KKday', url: `https://www.kkday.com/ko/search?q=${qFull}`, bg: '#F74600', fg: '#fff' });
+  }
+  if (place.type === '식사') {
+    links.push({ label: '트립어드바이저', url: `https://www.tripadvisor.co.kr/Search?q=${qFull}`, bg: '#34E0A1', fg: '#000' });
+  }
+  if (place.type === '숙소') {
+    links.push({ label: '부킹닷컴', url: `https://www.booking.com/search.html?ss=${qFull}`, bg: '#003580', fg: '#fff' });
+    links.push({ label: 'Agoda', url: `https://www.agoda.com/search?q=${qFull}`, bg: '#5392EB', fg: '#fff' });
+  }
+  if (place.type === '카페' || place.type === '식사') {
+    const city = findMatchingCity(destination);
+    if (city && CITY_DATA[city]?.country === 'kr') {
+      links.push({ label: '카카오맵', url: `https://map.kakao.com/?q=${q}`, bg: '#FAE100', fg: '#3C1E1E' });
+    }
+  }
+  return links;
+}
+
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+const state = {
+  currentStep: 0,
+  trip: { destination: '', startDate: '', endDate: '', arrivalTime: '', returnDepartureTime: '', accommodation: '', transport: 'subway', notes: '' },
+  places: [],
+  schedule: [],
+  tips: { weather: '', currency: '', transport: '', language: '', misc: '' }
+};
+const STEPS = [
+  { id: 'trip', label: '기본 정보' },
+  { id: 'places', label: '방문지' },
+  { id: 'details', label: '여행 팁' },
+  { id: 'schedule', label: '일정 배치' },
+  { id: 'output', label: '완성 일정표' }
+];
 const PLACE_TYPES = ['명소', '식사', '카페', '쇼핑', '숙소', '기타'];
 const BEST_TIMES  = ['오전 (9~12시)', '낮 (12~14시)', '오후 (14~17시)', '저녁 (17~20시)', '야간 (20시~)', '상관없음'];
 const TRANSPORTS  = { subway: '지하철', taxi: '택시', bus: '버스', walk: '도보', car: '자차/렌트', ferry: '페리' };
-
-// ══════════════════════════════════════════════
-//  Helpers
-// ══════════════════════════════════════════════
 let uid = 0;
 const newId = () => ++uid;
 
+// ═══════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════
+function v(id) { const e = document.getElementById(id); return e ? e.value : ''; }
+
 function dateRange(start, end) {
   const dates = [];
-  const s = new Date(start), e = new Date(end);
-  for (let d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
+  for (let d = new Date(start); d <= new Date(end); d.setDate(d.getDate() + 1))
     dates.push(d.toISOString().slice(0, 10));
-  }
   return dates;
 }
 
-function formatDate(dateStr) {
-  if (!dateStr) return '';
-  const d = new Date(dateStr);
-  const days = ['일', '월', '화', '수', '목', '금', '토'];
+function formatDate(s) {
+  if (!s) return '';
+  const d = new Date(s), days = ['일','월','화','수','목','금','토'];
   return `${d.getMonth()+1}/${d.getDate()}(${days[d.getDay()]})`;
 }
 
-function getDayLabel(dateStr, index, total) {
-  const label = `${index+1}일차 — ${formatDate(dateStr)}`;
-  if (index === 0)       return label + ' · 도착일';
-  if (index === total-1) return label + ' · 귀국일';
-  return label;
+function getDayLabel(date, i, total) {
+  const base = `${i+1}일차 — ${formatDate(date)}`;
+  if (i === 0) return base + ' · 도착일';
+  if (i === total-1) return base + ' · 귀국일';
+  return base;
 }
 
-// ══════════════════════════════════════════════
-//  Render Progress
-// ══════════════════════════════════════════════
+function findMatchingCity(dest) {
+  if (!dest) return null;
+  return Object.keys(CITY_DATA).find(city =>
+    dest.includes(city) || city.includes(dest)
+  ) || null;
+}
+
+function bestTimeOrder(bt) {
+  const order = { '오전 (9~12시)': 0, '낮 (12~14시)': 1, '오후 (14~17시)': 2, '저녁 (17~20시)': 3, '야간 (20시~)': 4, '상관없음': 5 };
+  return order[bt] ?? 5;
+}
+
+// ═══════════════════════════════════════════════
+//  SMART SCHEDULE ALGORITHM
+// ═══════════════════════════════════════════════
+function buildSchedule() {
+  const dates = dateRange(state.trip.startDate, state.trip.endDate);
+  const total = dates.length;
+  state.schedule = dates.map(date => ({ date, items: [], explanation: [] }));
+
+  // Fixed: arrival
+  if (state.trip.arrivalTime && total > 0) {
+    state.schedule[0].items.push({ type: 'fixed', time: state.trip.arrivalTime, name: '현지 도착', placeType: '이동' });
+  }
+  // Fixed: return
+  if (state.trip.returnDepartureTime && total > 0) {
+    state.schedule[total-1].items.push({ type: 'fixed', time: state.trip.returnDepartureTime, name: '공항 출발 (귀국)', placeType: '이동' });
+  }
+
+  const toSchedule = state.places.filter(p => p.type !== '숙소');
+
+  // 1. Group by zone
+  const zones = {};
+  toSchedule.forEach(p => {
+    const z = p.zone || '미분류';
+    if (!zones[z]) zones[z] = [];
+    zones[z].push(p);
+  });
+  const zoneList = Object.entries(zones).sort((a, b) => b[1].length - a[1].length);
+
+  // 2. Determine usable days
+  // Arrival day: reduced capacity (half)
+  // Departure day: reduced capacity (half)
+  // Middle days: full
+  const capacity = dates.map((_, i) => {
+    if (i === 0 && state.trip.arrivalTime) return 3;
+    if (i === total-1 && state.trip.returnDepartureTime) return 3;
+    return 6;
+  });
+
+  // 3. Assign zones to days greedily
+  const dayPlaces = dates.map(() => []);
+  const dayUsed = dates.map(() => 0);
+  let dayPtr = (state.trip.arrivalTime && total > 1) ? 1 : 0; // skip arrival day if crowded
+
+  // Sort zones: solo places go last
+  zoneList.forEach(([zone, places]) => {
+    // Find best day (most remaining capacity, prefer current pointer)
+    let bestDay = dayPtr;
+    for (let i = dayPtr; i < total; i++) {
+      if (dayUsed[i] + places.length <= capacity[i]) { bestDay = i; break; }
+      bestDay = i;
+    }
+    // Assign
+    const sortedPlaces = [...places].sort((a, b) => bestTimeOrder(a.bestTime) - bestTimeOrder(b.bestTime));
+    sortedPlaces.forEach(p => {
+      if (dayUsed[bestDay] < capacity[bestDay]) {
+        dayPlaces[bestDay].push(p);
+        dayUsed[bestDay]++;
+      } else {
+        // Overflow to next
+        const next = Math.min(bestDay + 1, total - 1);
+        dayPlaces[next].push(p);
+        dayUsed[next]++;
+      }
+    });
+    if (dayUsed[dayPtr] >= capacity[dayPtr] && dayPtr < total - 1) dayPtr++;
+  });
+
+  // 4. Build schedule items + explanations
+  dayPlaces.forEach((places, di) => {
+    const expl = [];
+    const zones = [...new Set(places.map(p => p.zone || '미분류'))];
+
+    if (zones.length === 1 && places.length > 1) {
+      expl.push(`📍 ${zones[0]} 집중 동선 — 걸어서 이동 가능, 이동 피로 최소화`);
+    } else if (zones.length > 1) {
+      expl.push(`📍 ${zones.join(' → ')} 순서로 이동`);
+    }
+    const morningPlaces = places.filter(p => p.bestTime?.includes('오전'));
+    const nightPlaces   = places.filter(p => p.bestTime?.includes('야간') || p.bestTime?.includes('저녁'));
+    if (morningPlaces.length)
+      expl.push(`🌅 ${morningPlaces.map(p=>p.name).join(', ')} — 오전 방문 시 대기 적음`);
+    if (nightPlaces.length)
+      expl.push(`🌙 ${nightPlaces.map(p=>p.name).join(', ')} — 야경·저녁 분위기 최적`);
+    const reservationNeeded = places.filter(p => p.needReservation);
+    if (reservationNeeded.length)
+      expl.push(`📌 사전 예약 필요: ${reservationNeeded.map(p=>p.name).join(', ')}`);
+    if (di === 0 && state.trip.arrivalTime)
+      expl.push(`✈️ 도착 후 일정 — 체력 고려해 가벼운 코스 배치`);
+    if (di === state.schedule.length-1 && state.trip.returnDepartureTime)
+      expl.push(`🛫 귀국일 — 공항 출발 시간 기준 오전·낮 일정으로 제한`);
+
+    state.schedule[di].explanation = expl;
+    places.forEach(p => {
+      state.schedule[di].items.push({
+        type: 'place', placeId: p.id, name: p.name, placeType: p.type,
+        zone: p.zone, duration: p.duration, bestTime: p.bestTime,
+        menu: p.menu, nearStation: p.nearStation,
+        needReservation: p.needReservation, reservationMethod: p.reservationMethod,
+        notes: p.notes
+      });
+    });
+    // Sort by bestTime within day
+    state.schedule[di].items.sort((a, b) => {
+      if (a.type === 'fixed') return -1;
+      if (b.type === 'fixed') return 1;
+      return bestTimeOrder(a.bestTime) - bestTimeOrder(b.bestTime);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  PROGRESS BAR
+// ═══════════════════════════════════════════════
 function renderProgress() {
   const bar = document.getElementById('progressBar');
-  let html = '';
-  STEPS.forEach((s, i) => {
+  bar.innerHTML = STEPS.map((s, i) => {
     const cls = i < state.currentStep ? 'done' : i === state.currentStep ? 'active' : '';
     const icon = i < state.currentStep ? '✓' : i + 1;
-    html += `<div class="step-dot ${cls}" onclick="goStep(${i})">
-      <div class="circle">${icon}</div>
-      <div class="label">${s.label}</div>
-    </div>`;
-    if (i < STEPS.length - 1) {
-      html += `<div class="step-connector ${i < state.currentStep ? 'done' : ''}"></div>`;
-    }
-  });
-  bar.innerHTML = html;
+    return `<div class="step-dot ${cls}" onclick="goStep(${i})"><div class="circle">${icon}</div><div class="label">${s.label}</div></div>`
+      + (i < STEPS.length-1 ? `<div class="step-connector ${i < state.currentStep ? 'done' : ''}"></div>` : '');
+  }).join('');
 }
 
-function goStep(i) {
-  if (i <= state.currentStep) {
-    state.currentStep = i;
-    render();
-  }
-}
+function goStep(i) { if (i <= state.currentStep) { state.currentStep = i; render(); } }
+function nextStep() { state.currentStep = Math.min(state.currentStep+1, STEPS.length-1); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+function prevStep() { state.currentStep = Math.max(state.currentStep-1, 0); render(); window.scrollTo({top:0,behavior:'smooth'}); }
 
-// ══════════════════════════════════════════════
-//  Step 0 — Trip Info
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+//  STEP 0 — TRIP
+// ═══════════════════════════════════════════════
 function renderTripStep() {
   const t = state.trip;
   return `
   <div class="card">
     <div class="card-title">✈️ 여행 기본 정보</div>
-    <div class="card-desc">항공편과 숙소, 여행 기간을 먼저 입력하세요. 이후 일정 배치의 기준이 됩니다.</div>
-
+    <div class="card-desc">항공편·숙소·기간을 입력하세요. 일정 배치의 기준이 됩니다.</div>
     <div class="form-group">
-      <label>여행지 <span class="optional">예: 도쿄, 파리, 제주</span></label>
+      <label>여행지 <span class="opt">예: 도쿄, 파리, 제주</span></label>
       <input type="text" id="destination" value="${t.destination}" placeholder="예: 일본 도쿄">
     </div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label>출발일</label>
-        <input type="date" id="startDate" value="${t.startDate}">
-      </div>
-      <div class="form-group">
-        <label>귀국일</label>
-        <input type="date" id="endDate" value="${t.endDate}">
-      </div>
+      <div class="form-group"><label>출발일</label><input type="date" id="startDate" value="${t.startDate}"></div>
+      <div class="form-group"><label>귀국일</label><input type="date" id="endDate" value="${t.endDate}"></div>
     </div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label>출발 항공편 시간 <span class="optional">선택</span></label>
-        <input type="time" id="departureTime" value="${t.departureTime}">
-        <div class="hint">현지 도착 시간 기준 입력 권장</div>
-      </div>
-      <div class="form-group">
-        <label>현지 도착 시간 <span class="optional">선택</span></label>
-        <input type="time" id="arrivalTime" value="${t.arrivalTime}">
-      </div>
+      <div class="form-group"><label>현지 도착 시간 <span class="opt">선택</span></label><input type="time" id="arrivalTime" value="${t.arrivalTime}"></div>
+      <div class="form-group"><label>귀국 항공 출발 <span class="opt">선택</span></label><input type="time" id="returnDepartureTime" value="${t.returnDepartureTime}"></div>
     </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label>귀국 항공편 출발 시간 <span class="optional">선택</span></label>
-        <input type="time" id="returnDepartureTime" value="${t.returnDepartureTime}">
-      </div>
-      <div class="form-group">
-        <label>공항 출발 권장 시간 <span class="optional">자동 계산 안 됨</span></label>
-        <input type="time" id="returnArrivalTime" value="${t.returnArrivalTime}" placeholder="직접 입력">
-        <div class="hint">국제선: 출발 3시간 전 / 국내선: 1시간 전</div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>숙소 이름 / 위치 <span class="optional">선택</span></label>
-      <input type="text" id="accommodation" value="${t.accommodation}" placeholder="예: 신주쿠역 근처 호텔, 긴자 에어비앤비">
-    </div>
-
+    <div class="form-group"><label>숙소 <span class="opt">선택</span></label><input type="text" id="accommodation" value="${t.accommodation}" placeholder="예: 신주쿠역 근처 호텔"></div>
     <div class="form-group">
       <label>주요 이동 수단</label>
-      <select id="transport">
-        ${Object.entries(TRANSPORTS).map(([v, l]) => `<option value="${v}" ${t.transport===v?'selected':''}>${l}</option>`).join('')}
-      </select>
+      <select id="transport">${Object.entries(TRANSPORTS).map(([v,l])=>`<option value="${v}" ${t.transport===v?'selected':''}>${l}</option>`).join('')}</select>
     </div>
-
-    <div class="form-group">
-      <label>메모 <span class="optional">선택 — 이미 예약된 것, 특이사항 등</span></label>
-      <textarea id="tripNotes" placeholder="예: 3일차 점심 레스토랑 예약 완료 (12:30), 막차 조심">${t.notes}</textarea>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="saveTripStep()">다음: 방문지 입력 →</button>
-    </div>
+    <div class="form-group"><label>메모 <span class="opt">이미 예약된 것 등</span></label><textarea id="tripNotes" placeholder="예: 3일차 오마카세 예약 완료 (18:00)">${t.notes}</textarea></div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="saveTripStep()">다음: 방문지 입력 →</button></div>
   </div>`;
 }
 
 function saveTripStep() {
   const t = state.trip;
-  t.destination        = v('destination');
-  t.startDate          = v('startDate');
-  t.endDate            = v('endDate');
-  t.departureTime      = v('departureTime');
-  t.arrivalTime        = v('arrivalTime');
-  t.returnDepartureTime= v('returnDepartureTime');
-  t.returnArrivalTime  = v('returnArrivalTime');
-  t.accommodation      = v('accommodation');
-  t.transport          = v('transport');
-  t.notes              = v('tripNotes');
-
-  if (!t.destination || !t.startDate || !t.endDate) {
-    alert('여행지, 출발일, 귀국일은 필수입니다.');
-    return;
-  }
-  if (new Date(t.endDate) < new Date(t.startDate)) {
-    alert('귀국일이 출발일보다 빠릅니다.');
-    return;
-  }
+  t.destination = v('destination'); t.startDate = v('startDate'); t.endDate = v('endDate');
+  t.arrivalTime = v('arrivalTime'); t.returnDepartureTime = v('returnDepartureTime');
+  t.accommodation = v('accommodation'); t.transport = v('transport'); t.notes = v('tripNotes');
+  if (!t.destination || !t.startDate || !t.endDate) { alert('여행지·출발일·귀국일은 필수입니다.'); return; }
+  if (new Date(t.endDate) < new Date(t.startDate)) { alert('귀국일이 출발일보다 빠릅니다.'); return; }
   nextStep();
 }
 
-// ══════════════════════════════════════════════
-//  Step 1 — Places List
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+//  STEP 1 — PLACES
+// ═══════════════════════════════════════════════
 function renderPlacesStep() {
-  const zones = getZones();
-  let html = `
-  <div class="card">
-    <div class="card-title">📍 방문하고 싶은 장소</div>
-    <div class="card-desc">가고 싶은 곳을 모두 추가하세요. 일정에 다 못 넣어도 괜찮아요 — 나중에 우선순위를 정할 수 있습니다.</div>
+  const matchedCity = findMatchingCity(state.trip.destination);
+  const zones = [...new Set(state.places.map(p => p.zone).filter(Boolean))];
+  const byZone = {};
+  state.places.forEach(p => {
+    const z = p.zone || '미분류';
+    if (!byZone[z]) byZone[z] = [];
+    byZone[z].push(p);
+  });
 
-    <div class="info-box">💡 구역(Zone)을 비슷한 지역끼리 묶어주면 이동 동선이 효율적입니다. 예: 신주쿠권, 아사쿠사권, 시부야권</div>
-
-    <div class="place-list" id="placeList">`;
-
-  if (state.places.length === 0) {
-    html += `<div style="text-align:center;color:var(--gray-400);padding:32px;font-size:14px;">아직 장소가 없습니다. 아래 버튼으로 추가하세요.</div>`;
+  let recBtn = '';
+  if (matchedCity) {
+    recBtn = `<button class="btn btn-purple" onclick="showRecommendPanel('${matchedCity}')" style="margin-bottom:14px">✨ ${matchedCity} 인기 장소 추천 받기</button>`;
   } else {
-    // Group by zone
-    const byZone = {};
-    state.places.forEach(p => {
-      const z = p.zone || '미분류';
-      if (!byZone[z]) byZone[z] = [];
-      byZone[z].push(p);
-    });
+    recBtn = `<div class="warn-box" style="margin-bottom:14px">✏️ 지원 도시: ${Object.keys(CITY_DATA).map(c=>CITY_DATA[c].emoji+c).join(' · ')}<br>여행지명에 도시 이름을 포함하면 추천 기능을 사용할 수 있습니다.</div>`;
+  }
+
+  let placeHtml = '';
+  if (state.places.length === 0) {
+    placeHtml = `<div style="text-align:center;color:var(--gray-400);padding:28px;font-size:14px">아직 장소가 없습니다.</div>`;
+  } else {
     Object.entries(byZone).forEach(([zone, places]) => {
-      html += `<div class="zone-section">
-        <div class="zone-header">
-          <span class="zone-label">📌 ${zone}</span>
-          <span class="zone-count">${places.length}곳</span>
-        </div>`;
-      places.forEach(p => {
-        html += renderPlaceCard(p);
-      });
-      html += `</div>`;
+      placeHtml += `<div class="zone-section"><div class="zone-header"><span class="zone-label">📌 ${zone}</span><span class="zone-count">${places.length}곳</span></div>`;
+      places.forEach(p => { placeHtml += renderPlaceCard(p); });
+      placeHtml += `</div>`;
     });
   }
 
-  html += `
-    </div>
-    <button class="add-btn" onclick="addPlace()">
-      <span style="font-size:20px">＋</span> 장소 추가하기
-    </button>
-
+  return `
+  <div class="card">
+    <div class="card-title">📍 방문하고 싶은 장소</div>
+    <div class="card-desc">가고 싶은 곳을 모두 추가하세요. 일정 배치는 자동으로 제안됩니다.</div>
+    ${recBtn}
+    <div class="place-list">${placeHtml}</div>
+    <button class="add-btn" onclick="showPlaceModal(null)"><span style="font-size:18px">＋</span> 직접 장소 추가하기</button>
     <div class="btn-row">
       <button class="btn btn-outline" onclick="prevStep()">← 이전</button>
-      <button class="btn btn-primary" onclick="goToDetails()">다음: 상세 정보 입력 →</button>
+      <button class="btn btn-primary" onclick="goToDetails()">다음: 여행 팁 →</button>
     </div>
   </div>`;
-
-  return html;
 }
 
 function renderPlaceCard(p) {
   return `
-  <div class="place-item" id="place-${p.id}">
+  <div class="place-item">
     <div class="place-item-header">
-      <span class="place-name-badge">${p.name || '이름 없음'}</span>
+      <span class="place-name-badge">${p.name}</span>
       <span class="place-type-tag">${p.type}</span>
-      ${p.needReservation ? '<span class="place-type-tag" style="background:#fef3c7;color:#92400e">예약필요</span>' : ''}
-      <button class="place-remove" onclick="removePlace(${p.id})" title="삭제">×</button>
+      ${p.needReservation ? '<span class="place-type-tag" style="background:#fef3c7;color:#92400e">📌예약필요</span>' : ''}
+      <button class="place-remove" onclick="removePlace(${p.id})">×</button>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:var(--gray-600)">
-      <div>📍 ${p.zone || '—'}</div>
-      <div>🚇 ${p.nearStation || '—'}</div>
-      <div>⏱ ${p.duration ? p.duration+'분' : '—'}</div>
-      <div>🌞 ${p.bestTime || '—'}</div>
+    <div class="place-meta">
+      <div>📍 ${p.zone||'—'}</div><div>🚇 ${p.nearStation||'—'}</div>
+      <div>⏱ ${p.duration?p.duration+'분':'—'}</div><div>🌞 ${p.bestTime||'—'}</div>
     </div>
-    <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="editPlace(${p.id})">수정</button>
+    <div style="margin-top:8px;display:flex;gap:6px">
+      <button class="btn btn-outline btn-sm" onclick="showPlaceModal(state.places.find(x=>x.id===${p.id}))">수정</button>
+    </div>
   </div>`;
-}
-
-function getZones() {
-  return [...new Set(state.places.map(p => p.zone).filter(Boolean))];
-}
-
-function addPlace() {
-  showPlaceModal(null);
-}
-
-function editPlace(id) {
-  const p = state.places.find(x => x.id === id);
-  if (p) showPlaceModal(p);
 }
 
 function removePlace(id) {
-  if (confirm('이 장소를 삭제할까요?')) {
-    state.places = state.places.filter(p => p.id !== id);
-    render();
-  }
+  if (confirm('이 장소를 삭제할까요?')) { state.places = state.places.filter(p => p.id !== id); render(); }
 }
 
 function goToDetails() {
-  if (state.places.length === 0) {
-    alert('장소를 최소 1개 이상 추가해주세요.');
-    return;
-  }
+  if (state.places.length === 0) { alert('장소를 최소 1개 이상 추가해주세요.'); return; }
   nextStep();
 }
 
-// ── Place Modal ──
-let editingPlace = null;
-
-function showPlaceModal(p) {
-  editingPlace = p ? { ...p } : {
-    id: newId(), name: '', type: '명소', zone: '', address: '',
-    nearStation: '', openTime: '', closeTime: '', duration: 60,
-    bestTime: '상관없음', menu: '', needReservation: false,
-    reservationMethod: '', notes: '', confirmed: false
-  };
+// ── Recommendation Panel ──
+function showRecommendPanel(cityName) {
+  const city = CITY_DATA[cityName];
+  if (!city) return;
+  const existingNames = new Set(state.places.map(p => p.name));
+  const selectedIds = new Set();
 
   const modal = document.createElement('div');
-  modal.id = 'placeModal';
-  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px`;
+  modal.id = 'recModal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px';
 
-  const zones = getZones();
-  const zoneDatalist = zones.map(z => `<option value="${z}">`).join('');
+  const cards = city.places.map((p, i) => {
+    const alreadyAdded = existingNames.has(p.name);
+    return `
+    <div class="rec-place-card ${alreadyAdded ? 'selected' : ''}" id="rec-card-${i}" onclick="toggleRec(${i}, '${cityName}')" ${alreadyAdded ? 'style="opacity:.5;pointer-events:none"' : ''}>
+      <div class="check" id="rec-check-${i}">${alreadyAdded ? '✓' : ''}</div>
+      <div class="rec-place-name">${p.name}</div>
+      <div class="rec-place-meta">
+        <span class="type-badge type-${p.type}">${p.type}</span> ${p.zone}<br>
+        ⏱ ${p.duration}분 · ${p.bestTime}<br>
+        ${p.nearStation ? '🚇 '+p.nearStation : ''}
+        ${p.menu ? '<br>🍽 '+p.menu : ''}
+        ${p.needReservation ? '<br>📌 <strong>예약 필요</strong>' : ''}
+        ${p.notes ? '<br>💬 '+p.notes : ''}
+      </div>
+    </div>`;
+  }).join('');
 
   modal.innerHTML = `
-  <div style="background:white;border-radius:14px;padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-      <h3 style="font-size:17px;font-weight:700">${editingPlace.name || '장소 추가'}</h3>
-      <button onclick="closeModal()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>
-    </div>
-
-    <datalist id="zoneList">${zoneDatalist}</datalist>
-
-    <div class="form-group">
-      <label>장소 이름 *</label>
-      <input type="text" id="pm-name" value="${editingPlace.name}" placeholder="예: 츠키지 시장">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>유형</label>
-        <select id="pm-type">
-          ${PLACE_TYPES.map(t => `<option ${editingPlace.type===t?'selected':''}>${t}</option>`).join('')}
-        </select>
+  <div style="background:white;border-radius:14px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="padding:20px 24px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:white;z-index:1">
+      <div>
+        <div style="font-size:17px;font-weight:700">${city.emoji} ${cityName} 인기 장소 추천</div>
+        <div style="font-size:12px;color:var(--gray-500);margin-top:2px">추가할 장소를 선택하세요 (복수 선택 가능)</div>
       </div>
-      <div class="form-group">
-        <label>구역 <span class="optional">예: 긴자권</span></label>
-        <input type="text" id="pm-zone" value="${editingPlace.zone}" list="zoneList" placeholder="새로 입력하거나 기존 선택">
-      </div>
+      <button onclick="document.getElementById('recModal').remove()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>가까운 역·정류장 <span class="optional">선택</span></label>
-        <input type="text" id="pm-station" value="${editingPlace.nearStation}" placeholder="예: 츠키지역 1번 출구">
-      </div>
-      <div class="form-group">
-        <label>소요 시간 (분)</label>
-        <input type="number" id="pm-duration" value="${editingPlace.duration}" min="15" step="15">
-      </div>
+    <div style="padding:20px">
+      <div class="rec-place-grid">${cards}</div>
     </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>오픈 시간 <span class="optional">선택</span></label>
-        <input type="time" id="pm-open" value="${editingPlace.openTime}">
-      </div>
-      <div class="form-group">
-        <label>마감 시간 <span class="optional">선택</span></label>
-        <input type="time" id="pm-close" value="${editingPlace.closeTime}">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>추천 방문 시간대</label>
-      <select id="pm-bestTime">
-        ${BEST_TIMES.map(t => `<option ${editingPlace.bestTime===t?'selected':''}>${t}</option>`).join('')}
-      </select>
-    </div>
-    <div class="form-group">
-      <label>추천 메뉴 / 볼거리 <span class="optional">선택</span></label>
-      <input type="text" id="pm-menu" value="${editingPlace.menu}" placeholder="예: 연어덮밥, 계란말이">
-    </div>
-    <div class="form-group" style="display:flex;gap:8px;align-items:center">
-      <input type="checkbox" id="pm-reservation" ${editingPlace.needReservation?'checked':''} style="width:auto;margin:0">
-      <label for="pm-reservation" style="margin:0;font-size:14px;font-weight:400">예약 필요</label>
-    </div>
-    <div class="form-group" id="pm-resMethod-group" style="${editingPlace.needReservation?'':'display:none'}">
-      <label>예약 방법 <span class="optional">앱·전화·현장</span></label>
-      <input type="text" id="pm-resMethod" value="${editingPlace.reservationMethod}" placeholder="예: 구글맵 예약, 전화 예약">
-    </div>
-    <div class="form-group">
-      <label>메모 <span class="optional">선택 — 불확실한 정보는 여기에</span></label>
-      <textarea id="pm-notes" placeholder="예: 영업시간 변동 확인 필요, 현금 결제만 가능 여부 미확인">${editingPlace.notes}</textarea>
-    </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
-      <button class="btn btn-outline" onclick="closeModal()">취소</button>
-      <button class="btn btn-primary" onclick="savePlace()">저장</button>
+    <div style="padding:16px 24px;border-top:1px solid var(--gray-200);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:white">
+      <button class="btn btn-outline" onclick="document.getElementById('recModal').remove()">취소</button>
+      <button class="btn btn-primary" onclick="addSelectedRec('${cityName}')">선택한 장소 추가</button>
     </div>
   </div>`;
 
+  modal.dataset.selected = JSON.stringify([]);
   document.body.appendChild(modal);
+}
 
-  document.getElementById('pm-reservation').addEventListener('change', function() {
-    document.getElementById('pm-resMethod-group').style.display = this.checked ? '' : 'none';
+function toggleRec(idx, cityName) {
+  const modal = document.getElementById('recModal');
+  let selected = JSON.parse(modal.dataset.selected);
+  const card = document.getElementById(`rec-card-${idx}`);
+  const check = document.getElementById(`rec-check-${idx}`);
+  if (selected.includes(idx)) {
+    selected = selected.filter(i => i !== idx);
+    card.classList.remove('selected');
+    check.textContent = '';
+  } else {
+    selected.push(idx);
+    card.classList.add('selected');
+    check.textContent = '✓';
+  }
+  modal.dataset.selected = JSON.stringify(selected);
+}
+
+function addSelectedRec(cityName) {
+  const modal = document.getElementById('recModal');
+  const selected = JSON.parse(modal.dataset.selected);
+  const city = CITY_DATA[cityName];
+  selected.forEach(idx => {
+    const p = city.places[idx];
+    state.places.push({ id: newId(), ...p });
   });
-}
-
-function closeModal() {
-  const m = document.getElementById('placeModal');
-  if (m) m.remove();
-  editingPlace = null;
-}
-
-function savePlace() {
-  const name = v('pm-name').trim();
-  if (!name) { alert('장소 이름을 입력해주세요.'); return; }
-
-  const p = {
-    id: editingPlace.id,
-    name,
-    type:             v('pm-type'),
-    zone:             v('pm-zone').trim() || '미분류',
-    nearStation:      v('pm-station'),
-    duration:         parseInt(v('pm-duration')) || 60,
-    openTime:         v('pm-open'),
-    closeTime:        v('pm-close'),
-    bestTime:         v('pm-bestTime'),
-    menu:             v('pm-menu'),
-    needReservation:  document.getElementById('pm-reservation').checked,
-    reservationMethod:v('pm-resMethod'),
-    notes:            v('pm-notes')
-  };
-
-  const idx = state.places.findIndex(x => x.id === p.id);
-  if (idx >= 0) state.places[idx] = p;
-  else state.places.push(p);
-
-  closeModal();
+  modal.remove();
   render();
 }
 
-// ══════════════════════════════════════════════
-//  Step 2 — Details / Checklist
-// ══════════════════════════════════════════════
-function renderDetailsStep() {
-  let html = `
-  <div class="card">
-    <div class="card-title">📋 여행 준비 체크리스트</div>
-    <div class="card-desc">현지 여행에 필요한 실용 정보를 정리해두세요. 나중에 일정표 하단에 함께 출력됩니다.</div>
-
-    <div class="form-group">
-      <label>날씨 / 복장 조언 <span class="optional">선택</span></label>
-      <input type="text" id="tip-weather" value="${state.tips.weather}" placeholder="예: 6월 도쿄 평균 26도, 우산 필수">
+// ── Place Modal ──
+let _editingPlace = null;
+function showPlaceModal(p) {
+  _editingPlace = p ? {...p} : { id: newId(), name:'', type:'명소', zone:'', nearStation:'', duration:90, bestTime:'상관없음', menu:'', needReservation:false, reservationMethod:'', notes:'' };
+  const zones = [...new Set(state.places.map(x=>x.zone).filter(Boolean))];
+  const m = document.createElement('div');
+  m.id = 'placeModal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px';
+  m.innerHTML = `
+  <div style="background:white;border-radius:14px;padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+      <h3 style="font-size:16px;font-weight:700">${_editingPlace.name||'장소 추가'}</h3>
+      <button onclick="closePlaceModal()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>
     </div>
-    <div class="form-group">
-      <label>환율 / 결제 수단 <span class="optional">선택</span></label>
-      <input type="text" id="tip-currency" value="${state.tips.currency}" placeholder="예: 1엔 ≈ 9원, IC카드(스이카) 사용 권장">
+    <datalist id="zoneList">${zones.map(z=>`<option value="${z}">`).join('')}</datalist>
+    <div class="form-group"><label>장소 이름 *</label><input type="text" id="pm-name" value="${_editingPlace.name}" placeholder="예: 츠키지 시장"></div>
+    <div class="form-row">
+      <div class="form-group"><label>유형</label><select id="pm-type">${PLACE_TYPES.map(t=>`<option ${_editingPlace.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div class="form-group"><label>구역</label><input type="text" id="pm-zone" value="${_editingPlace.zone}" list="zoneList" placeholder="예: 신주쿠권"></div>
     </div>
-    <div class="form-group">
-      <label>교통 카드 / 패스 <span class="optional">선택</span></label>
-      <input type="text" id="tip-transport" value="${state.tips.transport}" placeholder="예: 스이카 공항에서 발급, 도쿄 메트로 72시간 패스 추천">
+    <div class="form-row">
+      <div class="form-group"><label>가까운 역·정류장</label><input type="text" id="pm-station" value="${_editingPlace.nearStation}" placeholder="예: 신주쿠역 동쪽출구"></div>
+      <div class="form-group"><label>소요 시간 (분)</label><input type="number" id="pm-duration" value="${_editingPlace.duration}" min="15" step="15"></div>
     </div>
-    <div class="form-group">
-      <label>언어 / 번역 앱 <span class="optional">선택</span></label>
-      <input type="text" id="tip-language" value="${state.tips.language}" placeholder="예: Google 번역 카메라 기능 / 파파고 유용">
+    <div class="form-group"><label>추천 방문 시간대</label><select id="pm-bestTime">${BEST_TIMES.map(t=>`<option ${_editingPlace.bestTime===t?'selected':''}>${t}</option>`).join('')}</select></div>
+    <div class="form-group"><label>추천 메뉴·볼거리 <span class="opt">선택</span></label><input type="text" id="pm-menu" value="${_editingPlace.menu}" placeholder="예: 연어덮밥, 말차 아이스크림"></div>
+    <div class="form-group" style="display:flex;gap:8px;align-items:center">
+      <input type="checkbox" id="pm-res" ${_editingPlace.needReservation?'checked':''} style="width:auto;margin:0">
+      <label for="pm-res" style="margin:0;font-size:14px;font-weight:400">예약 필요</label>
     </div>
-    <div class="form-group">
-      <label>기타 팁 <span class="optional">선택</span></label>
-      <textarea id="tip-misc" placeholder="예: 콘센트 어댑터 불필요, 와이파이 도시락 예약 완료">${state.tips.misc}</textarea>
+    <div id="pm-res-group" class="form-group" ${_editingPlace.needReservation?'':'style="display:none"'}>
+      <label>예약 방법</label><input type="text" id="pm-resMethod" value="${_editingPlace.reservationMethod}" placeholder="예: 공식 웹사이트, 네이버 예약">
     </div>
-
-    <div class="btn-row">
-      <button class="btn btn-outline" onclick="prevStep()">← 이전</button>
-      <button class="btn btn-primary" onclick="saveDetailsStep()">다음: 일정 배치 →</button>
+    <div class="form-group"><label>메모</label><textarea id="pm-notes" placeholder="불확실한 정보 등">${_editingPlace.notes}</textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-outline" onclick="closePlaceModal()">취소</button>
+      <button class="btn btn-primary" onclick="savePlaceModal()">저장</button>
     </div>
   </div>`;
-
-  return html;
+  document.body.appendChild(m);
+  document.getElementById('pm-res').addEventListener('change', function() {
+    document.getElementById('pm-res-group').style.display = this.checked ? '' : 'none';
+  });
+}
+function closePlaceModal() { document.getElementById('placeModal')?.remove(); }
+function savePlaceModal() {
+  const name = v('pm-name').trim();
+  if (!name) { alert('장소 이름을 입력해주세요.'); return; }
+  const p = { id: _editingPlace.id, name, type: v('pm-type'), zone: v('pm-zone').trim()||'미분류', nearStation: v('pm-station'), duration: parseInt(v('pm-duration'))||60, bestTime: v('pm-bestTime'), menu: v('pm-menu'), needReservation: document.getElementById('pm-res').checked, reservationMethod: v('pm-resMethod'), notes: v('pm-notes') };
+  const idx = state.places.findIndex(x => x.id === p.id);
+  if (idx >= 0) state.places[idx] = p; else state.places.push(p);
+  closePlaceModal(); render();
 }
 
-function saveDetailsStep() {
-  state.tips.weather   = v('tip-weather');
-  state.tips.currency  = v('tip-currency');
-  state.tips.transport = v('tip-transport');
-  state.tips.language  = v('tip-language');
-  state.tips.misc      = v('tip-misc');
+// ═══════════════════════════════════════════════
+//  STEP 2 — TIPS
+// ═══════════════════════════════════════════════
+function renderDetailsStep() {
+  return `
+  <div class="card">
+    <div class="card-title">🧳 여행 팁 정리</div>
+    <div class="card-desc">현지 실용 정보를 입력하면 완성 일정표 하단에 함께 출력됩니다. 모두 선택 사항입니다.</div>
+    <div class="form-group"><label>날씨 / 복장</label><input type="text" id="tip-weather" value="${state.tips.weather}" placeholder="예: 6월 도쿄 평균 26도, 우산 필수"></div>
+    <div class="form-group"><label>환율 / 결제 수단</label><input type="text" id="tip-currency" value="${state.tips.currency}" placeholder="예: 1엔 ≈ 9원, 현금 필요"></div>
+    <div class="form-group"><label>교통 카드 / 패스</label><input type="text" id="tip-transport" value="${state.tips.transport}" placeholder="예: 스이카 공항에서 발급"></div>
+    <div class="form-group"><label>언어 / 번역 앱</label><input type="text" id="tip-language" value="${state.tips.language}" placeholder="예: 구글번역 카메라, 파파고"></div>
+    <div class="form-group"><label>기타 팁</label><textarea id="tip-misc" placeholder="예: 콘센트 어댑터 불필요, 와이파이 도시락 예약 완료">${state.tips.misc}</textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="prevStep()">← 이전</button>
+      <button class="btn btn-primary" onclick="saveTipsStep()">다음: 일정 자동 배치 →</button>
+    </div>
+  </div>`;
+}
+function saveTipsStep() {
+  state.tips.weather = v('tip-weather'); state.tips.currency = v('tip-currency');
+  state.tips.transport = v('tip-transport'); state.tips.language = v('tip-language');
+  state.tips.misc = v('tip-misc');
   buildSchedule();
   nextStep();
 }
 
-// ══════════════════════════════════════════════
-//  Step 3 — Schedule Builder
-// ══════════════════════════════════════════════
-function buildSchedule() {
-  const dates = dateRange(state.trip.startDate, state.trip.endDate);
-  const total = dates.length;
-
-  // Sort places: prioritize by bestTime alignment (morning places early, etc.)
-  const allPlaces = [...state.places];
-
-  // Split non-meal places and meal/cafe by zone
-  const zones = [...new Set(allPlaces.map(p => p.zone || '미분류'))];
-
-  // Build empty schedule
-  state.schedule = dates.map((date, i) => {
-    const items = [];
-
-    // Arrival day: airport arrival → accommodation
-    if (i === 0 && state.trip.arrivalTime) {
-      items.push({ type: 'fixed', time: state.trip.arrivalTime, name: '현지 도착', placeType: '이동', transport: TRANSPORTS[state.trip.transport], duration: 0 });
-    }
-
-    return { date, items };
-  });
-
-  // Distribute places across days (simple round-robin by zone first)
-  const placesPerDay = Math.ceil(allPlaces.length / total);
-  let dayIdx = 0;
-  let assignedCount = 0;
-
-  // Sort: meal first, then by bestTime
-  const sorted = [...allPlaces].sort((a, b) => {
-    const order = { '명소': 0, '카페': 1, '식사': 2, '쇼핑': 3, '숙소': 9, '기타': 5 };
-    return (order[a.type] || 5) - (order[b.type] || 5);
-  });
-
-  sorted.forEach((place, i) => {
-    // Skip accommodation type from scheduling (it's fixed)
-    if (place.type === '숙소') return;
-
-    const day = state.schedule[Math.min(dayIdx, total - 1)];
-    day.items.push({
-      type: 'place',
-      placeId: place.id,
-      name: place.name,
-      placeType: place.type,
-      transport: '',
-      duration: place.duration,
-      bestTime: place.bestTime,
-      menu: place.menu,
-      nearStation: place.nearStation,
-      needReservation: place.needReservation,
-      notes: place.notes
-    });
-
-    assignedCount++;
-    if (assignedCount % Math.max(1, placesPerDay) === 0) dayIdx++;
-  });
-
-  // Add return on last day
-  if (state.trip.returnDepartureTime) {
-    const lastDay = state.schedule[total - 1];
-    lastDay.items.push({
-      type: 'fixed',
-      time: state.trip.returnDepartureTime,
-      name: '공항 출발 (귀국)',
-      placeType: '이동',
-      transport: '',
-      duration: 0
-    });
-  }
-}
-
+// ═══════════════════════════════════════════════
+//  STEP 3 — SCHEDULE
+// ═══════════════════════════════════════════════
 function renderScheduleStep() {
-  const dates = dateRange(state.trip.startDate, state.trip.endDate);
-  const total = dates.length;
-
+  const total = state.schedule.length;
   let html = `
   <div class="card">
     <div class="card-title">🗓️ 일정 배치 조정</div>
-    <div class="card-desc">장소를 드래그하거나 다른 날로 옮길 수 있습니다. 만족스러우면 '완성 일정표 보기'를 클릭하세요.</div>
-
-    <div class="warn-box">⚠️ 아래 배치는 자동 제안입니다. 실제 거리·예약 여부·영업시간을 꼭 확인해주세요.</div>`;
+    <div class="card-desc">AI가 구역·시간대·귀국일을 분석해 자동 배치했습니다. 장소를 다른 날로 옮기거나 삭제할 수 있습니다.</div>
+    <div class="warn-box">⚠️ 자동 배치 제안입니다. 실제 영업시간·예약 여부·이동 거리를 꼭 확인하세요.</div>`;
 
   state.schedule.forEach((day, di) => {
+    const hasRes = day.items.some(i => i.needReservation);
     html += `
     <div class="day-block">
       <div class="day-header">
         <span>${getDayLabel(day.date, di, total)}</span>
-        <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:white;border:none;cursor:pointer" onclick="addItemToDay(${di})">+ 추가</button>
-      </div>
-      <div style="padding:14px" id="day-items-${di}">`;
+        <div style="display:flex;align-items:center;gap:8px">
+          ${hasRes ? '<span class="day-note-tag">📌 예약 필요</span>' : ''}
+          <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:white;border:none;cursor:pointer;font-family:inherit" onclick="addItemToDay(${di})">+ 추가</button>
+        </div>
+      </div>`;
 
-    if (day.items.length === 0) {
-      html += `<div style="text-align:center;color:var(--gray-400);padding:20px;font-size:13px">아직 배치된 장소가 없습니다</div>`;
-    } else {
-      day.items.forEach((item, ii) => {
-        html += renderScheduleItem(item, di, ii, total);
-      });
+    if (day.explanation && day.explanation.length > 0) {
+      html += `<div class="day-explanation"><ul class="day-exp-list">${day.explanation.map(e=>`<li>${e}</li>`).join('')}</ul></div>`;
     }
 
-    html += `</div></div>`;
+    if (day.items.length === 0) {
+      html += `<div style="padding:18px;text-align:center;color:var(--gray-400);font-size:13px">배치된 장소가 없습니다</div>`;
+    } else {
+      day.items.forEach((item, ii) => { html += renderSchedItem(item, di, ii, total); });
+    }
+    html += `</div>`;
   });
 
   html += `
@@ -1000,208 +851,170 @@ function renderScheduleStep() {
       <button class="btn btn-success" onclick="nextStep()">✓ 완성 일정표 보기</button>
     </div>
   </div>`;
-
   return html;
 }
 
-function renderScheduleItem(item, di, ii, totalDays) {
+function renderSchedItem(item, di, ii, total) {
   const moveBtns = `
-    <div style="display:flex;gap:4px">
-      ${di > 0 ? `<button class="btn btn-outline btn-sm" onclick="moveItem(${di},${ii},-1)" title="하루 앞으로">◀</button>` : ''}
-      ${di < totalDays-1 ? `<button class="btn btn-outline btn-sm" onclick="moveItem(${di},${ii},1)" title="하루 뒤로">▶</button>` : ''}
-      <button class="btn btn-danger-outline btn-sm" onclick="removeItem(${di},${ii})">×</button>
-    </div>`;
-
-  const badge = `<span class="type-badge type-${item.placeType}">${item.placeType}</span>`;
-
+    ${di > 0 ? `<button class="btn btn-outline btn-xs" onclick="moveItem(${di},${ii},-1)" title="하루 앞으로">◀</button>` : ''}
+    ${di < total-1 ? `<button class="btn btn-outline btn-xs" onclick="moveItem(${di},${ii},1)" title="하루 뒤로">▶</button>` : ''}
+    <button class="btn btn-xs" style="background:white;border:1.5px solid var(--danger);color:var(--danger)" onclick="removeItem(${di},${ii})">×</button>`;
   return `
-  <div style="display:flex;align-items:center;gap:12px;padding:10px;border-bottom:1px solid var(--gray-100);border-radius:6px;margin-bottom:4px">
-    <div style="flex:1">
-      <div style="font-weight:600;font-size:14px">${item.name}${badge}</div>
-      ${item.nearStation ? `<div style="font-size:12px;color:var(--gray-500)">🚇 ${item.nearStation}</div>` : ''}
-      ${item.duration ? `<div style="font-size:12px;color:var(--gray-500)">⏱ 약 ${item.duration}분</div>` : ''}
-      ${item.needReservation ? `<div style="font-size:12px;color:#92400e">📌 예약 필요</div>` : ''}
+  <div class="schedule-item">
+    <div class="sched-info">
+      <div class="sched-name">
+        ${item.name}
+        <span class="type-badge type-${item.placeType}">${item.placeType}</span>
+        ${item.needReservation ? '<span style="font-size:11px;color:#92400e;font-weight:600">📌예약</span>' : ''}
+      </div>
+      <div class="sched-sub">
+        ${item.nearStation ? '🚇 '+item.nearStation : ''}
+        ${item.duration ? ' · ⏱ '+item.duration+'분' : ''}
+        ${item.bestTime && item.bestTime !== '상관없음' ? ' · '+item.bestTime : ''}
+      </div>
     </div>
-    ${moveBtns}
+    <div class="sched-move">${moveBtns}</div>
   </div>`;
 }
 
-function moveItem(dayIdx, itemIdx, dir) {
-  const targetDay = dayIdx + dir;
-  if (targetDay < 0 || targetDay >= state.schedule.length) return;
-  const item = state.schedule[dayIdx].items.splice(itemIdx, 1)[0];
-  state.schedule[targetDay].items.push(item);
+function moveItem(di, ii, dir) {
+  const target = di + dir;
+  if (target < 0 || target >= state.schedule.length) return;
+  const item = state.schedule[di].items.splice(ii, 1)[0];
+  state.schedule[target].items.push(item);
   render();
 }
-
-function removeItem(dayIdx, itemIdx) {
-  state.schedule[dayIdx].items.splice(itemIdx, 1);
-  render();
-}
+function removeItem(di, ii) { state.schedule[di].items.splice(ii, 1); render(); }
 
 function addItemToDay(dayIdx) {
-  // Simple: show a select of unscheduled places
-  const scheduledIds = state.schedule.flatMap(d => d.items.map(i => i.placeId)).filter(Boolean);
-  const unscheduled = state.places.filter(p => !scheduledIds.includes(p.id));
-
-  if (unscheduled.length === 0) {
-    // Allow adding from all places
-    const all = state.places;
-    showAddItemModal(dayIdx, all);
-  } else {
-    showAddItemModal(dayIdx, unscheduled);
-  }
-}
-
-function showAddItemModal(dayIdx, places) {
-  if (places.length === 0) { alert('추가할 장소가 없습니다. 2단계에서 장소를 먼저 추가하세요.'); return; }
-  const modal = document.createElement('div');
-  modal.id = 'addItemModal';
-  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px`;
-  modal.innerHTML = `
-  <div style="background:white;border-radius:14px;padding:24px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
-    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px">장소 선택</h3>
-    <div style="display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto">
+  const places = state.places.filter(p => p.type !== '숙소');
+  if (places.length === 0) { alert('장소를 먼저 추가해주세요.'); return; }
+  const m = document.createElement('div');
+  m.id = 'addItemModal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px';
+  m.innerHTML = `
+  <div style="background:white;border-radius:14px;padding:22px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.2);max-height:80vh;overflow-y:auto">
+    <h3 style="font-size:15px;font-weight:700;margin-bottom:14px">장소 선택</h3>
+    <div style="display:flex;flex-direction:column;gap:7px">
       ${places.map(p => `
-        <button onclick="addItemConfirm(${dayIdx},${p.id})" style="text-align:left;padding:12px;border:1.5px solid var(--gray-200);border-radius:8px;background:white;cursor:pointer;font-size:14px">
-          <strong>${p.name}</strong>
-          <span class="type-badge type-${p.type}" style="font-size:11px">${p.type}</span>
-          <div style="font-size:12px;color:var(--gray-500);margin-top:2px">${p.zone} · ${p.duration}분</div>
-        </button>`).join('')}
+      <button onclick="addItemConfirm(${dayIdx},${p.id})" style="text-align:left;padding:11px;border:1.5px solid var(--gray-200);border-radius:8px;background:white;cursor:pointer;font-size:13px;font-family:inherit">
+        <strong>${p.name}</strong> <span class="type-badge type-${p.type}">${p.type}</span>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:2px">${p.zone||''} · ${p.duration}분</div>
+      </button>`).join('')}
     </div>
-    <div style="margin-top:16px;text-align:right">
-      <button class="btn btn-outline" onclick="document.getElementById('addItemModal').remove()">취소</button>
-    </div>
+    <div style="margin-top:14px;text-align:right"><button class="btn btn-outline btn-sm" onclick="document.getElementById('addItemModal').remove()">취소</button></div>
   </div>`;
-  document.body.appendChild(modal);
+  document.body.appendChild(m);
 }
-
 function addItemConfirm(dayIdx, placeId) {
   const p = state.places.find(x => x.id === placeId);
   if (!p) return;
-  state.schedule[dayIdx].items.push({
-    type: 'place', placeId: p.id, name: p.name, placeType: p.type,
-    transport: '', duration: p.duration, bestTime: p.bestTime,
-    menu: p.menu, nearStation: p.nearStation,
-    needReservation: p.needReservation, notes: p.notes
-  });
+  state.schedule[dayIdx].items.push({ type:'place', placeId:p.id, name:p.name, placeType:p.type, zone:p.zone, duration:p.duration, bestTime:p.bestTime, menu:p.menu, nearStation:p.nearStation, needReservation:p.needReservation, reservationMethod:p.reservationMethod, notes:p.notes });
   document.getElementById('addItemModal').remove();
   render();
 }
 
-// ══════════════════════════════════════════════
-//  Step 4 — Output
-// ══════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+//  STEP 4 — OUTPUT
+// ═══════════════════════════════════════════════
 function renderOutputStep() {
   const t = state.trip;
   const dates = dateRange(t.startDate, t.endDate);
-  const total  = dates.length;
+  const total = dates.length;
 
   let html = `
   <div class="card">
     <div class="card-title">📄 완성 일정표</div>
-    <div class="card-desc">${t.destination} · ${formatDate(t.startDate)} ~ ${formatDate(t.endDate)} · ${total}일 여행</div>
-
+    <div class="card-desc">${t.destination} · ${formatDate(t.startDate)} ~ ${formatDate(t.endDate)} · ${total}일</div>
     <div class="export-row">
-      <button class="btn btn-outline" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
-      <button class="btn btn-outline" onclick="copyText()">📋 텍스트 복사</button>
-      <button class="btn btn-outline" onclick="prevStep()">← 일정 수정</button>
+      <button class="btn btn-outline btn-sm" onclick="window.print()">🖨️ 인쇄·PDF</button>
+      <button class="btn btn-outline btn-sm" onclick="copyText()">📋 텍스트 복사</button>
+      <button class="btn btn-outline btn-sm" onclick="prevStep()">← 일정 수정</button>
     </div>`;
 
-  // Summary box
-  html += `
-  <div style="background:var(--gray-50);border-radius:10px;padding:16px;margin-bottom:20px;font-size:13px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;color:var(--gray-700)">
-      ${t.accommodation ? `<div>🏨 <strong>숙소</strong>: ${t.accommodation}</div>` : ''}
-      <div>🚌 <strong>주 교통수단</strong>: ${TRANSPORTS[t.transport]}</div>
-      ${t.arrivalTime ? `<div>✈️ <strong>현지 도착</strong>: ${t.arrivalTime}</div>` : ''}
-      ${t.returnDepartureTime ? `<div>🛫 <strong>귀국 출발</strong>: ${t.returnDepartureTime}</div>` : ''}
-    </div>
-    ${t.notes ? `<div style="margin-top:10px;color:var(--gray-600)">📝 ${t.notes}</div>` : ''}
-  </div>`;
+  // Summary
+  html += `<div class="output-summary"><div class="output-summary-grid">
+    ${t.accommodation ? `<div>🏨 <strong>숙소</strong>: ${t.accommodation}</div>` : ''}
+    <div>🚌 <strong>이동수단</strong>: ${TRANSPORTS[t.transport]||t.transport}</div>
+    ${t.arrivalTime ? `<div>✈️ <strong>현지 도착</strong>: ${t.arrivalTime}</div>` : ''}
+    ${t.returnDepartureTime ? `<div>🛫 <strong>귀국 출발</strong>: ${t.returnDepartureTime}</div>` : ''}
+  </div>${t.notes ? `<div style="margin-top:8px;color:var(--gray-600);font-size:13px">📝 ${t.notes}</div>` : ''}</div>`;
 
   // Day tables
   state.schedule.forEach((day, di) => {
+    const hasRes = day.items.some(i => i.needReservation);
     html += `
     <div class="day-block">
       <div class="day-header">
         ${getDayLabel(day.date, di, total)}
-        ${day.items.some(i => i.needReservation) ? '<span class="day-note">📌 예약 필요 항목 있음</span>' : ''}
+        ${hasRes ? '<span class="day-note-tag">📌 예약 필요 항목 있음</span>' : ''}
       </div>`;
 
     if (day.items.length === 0) {
-      html += `<div style="padding:20px;color:var(--gray-400);font-size:14px;text-align:center">배치된 일정이 없습니다</div>`;
+      html += `<div style="padding:18px;color:var(--gray-400);font-size:13px;text-align:center">배치된 일정이 없습니다</div>`;
     } else {
-      html += `
-      <table>
-        <thead>
-          <tr>
-            <th>시간</th>
-            <th>장소 / 활동</th>
-            <th>이동</th>
-            <th>추천 메뉴·볼거리</th>
-            <th>메모</th>
-          </tr>
-        </thead>
-        <tbody>`;
-
+      html += `<table><thead><tr><th>시간대</th><th>장소·활동</th><th>추천 메뉴·볼거리</th><th>메모</th></tr></thead><tbody>`;
       day.items.forEach(item => {
-        const reserveBadge = item.needReservation ? '<span style="font-size:11px;color:#92400e;font-weight:600"> 📌예약</span>' : '';
+        const bookingLinks = item.type === 'place'
+          ? getBookingLinks({ name: item.name, type: item.placeType }, t.destination)
+          : [];
+        const linksHtml = bookingLinks.length
+          ? `<div class="booking-links">${bookingLinks.map(l=>`<a class="booking-btn" href="${l.url}" target="_blank" rel="noopener" style="background:${l.bg};color:${l.fg}">${l.label}</a>`).join('')}</div>`
+          : '';
         html += `
-          <tr>
-            <td class="time-cell">${item.time || (item.bestTime && item.bestTime !== '상관없음' ? '(' + item.bestTime + ')' : '—')}</td>
-            <td class="place-cell">
-              ${item.name}
-              <span class="type-badge type-${item.placeType}">${item.placeType}</span>
-              ${reserveBadge}
-              ${item.nearStation ? `<div style="font-size:12px;color:var(--gray-400);font-weight:400">🚇 ${item.nearStation}</div>` : ''}
-            </td>
-            <td class="transport-cell">${item.transport || '—'}</td>
-            <td class="menu-cell">${item.menu || '—'}</td>
-            <td class="note-cell">${item.notes || ''}</td>
-          </tr>`;
+        <tr>
+          <td class="time-cell">${item.time || (item.bestTime && item.bestTime !== '상관없음' ? item.bestTime : '—')}</td>
+          <td class="place-cell">
+            ${item.name} <span class="type-badge type-${item.placeType}">${item.placeType}</span>
+            ${item.needReservation ? '<span style="font-size:11px;color:#92400e;font-weight:600"> 📌예약</span>' : ''}
+            ${item.nearStation ? `<div style="font-size:11px;color:var(--gray-400);font-weight:400;margin-top:2px">🚇 ${item.nearStation}</div>` : ''}
+            ${linksHtml}
+          </td>
+          <td style="font-size:12px;color:var(--gray-600)">${item.menu||'—'}</td>
+          <td style="font-size:12px;color:var(--primary)">${item.notes||''}</td>
+        </tr>`;
       });
-
       html += `</tbody></table>`;
     }
-
     html += `</div>`;
   });
 
-  // Tips section
-  const hasTips = Object.values(state.tips).some(v => v.trim());
-  if (hasTips) {
+  // Reservation checklist
+  const resList = state.places.filter(p => p.needReservation);
+  if (resList.length) {
     html += `
-    <div class="card" style="margin-top:20px">
-      <div class="card-title" style="font-size:16px">🧳 여행 준비 가이드</div>
-      <div class="tips-grid" style="margin-top:16px">
-        ${state.tips.weather   ? `<div class="tip-card"><h4>🌤 날씨 / 복장</h4><p>${state.tips.weather}</p></div>` : ''}
-        ${state.tips.currency  ? `<div class="tip-card"><h4>💴 환율 / 결제</h4><p>${state.tips.currency}</p></div>` : ''}
-        ${state.tips.transport ? `<div class="tip-card"><h4>🚇 교통 카드 / 패스</h4><p>${state.tips.transport}</p></div>` : ''}
-        ${state.tips.language  ? `<div class="tip-card"><h4>🗣 언어 / 번역</h4><p>${state.tips.language}</p></div>` : ''}
-        ${state.tips.misc      ? `<div class="tip-card" style="grid-column:1/-1"><h4>💡 기타 팁</h4><p>${state.tips.misc}</p></div>` : ''}
-      </div>
+    <div class="card" style="margin-top:18px">
+      <div class="card-title" style="font-size:16px">📌 예약 체크리스트</div>
+      <table style="margin-top:14px">
+        <thead><tr><th>장소</th><th>예약 방법</th><th>예약 링크</th><th>완료</th></tr></thead>
+        <tbody>
+          ${resList.map(p => {
+            const links = getBookingLinks(p, t.destination);
+            return `<tr>
+              <td class="place-cell">${p.name} <span class="type-badge type-${p.type}">${p.type}</span></td>
+              <td style="font-size:12px;color:var(--gray-600)">${p.reservationMethod||'직접 확인'}</td>
+              <td><div class="booking-links">${links.map(l=>`<a class="booking-btn" href="${l.url}" target="_blank" rel="noopener" style="background:${l.bg};color:${l.fg}">${l.label}</a>`).join('')}</div></td>
+              <td><input type="checkbox" style="width:auto"></td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
     </div>`;
   }
 
-  // Reservation checklist
-  const reservePlaces = state.places.filter(p => p.needReservation);
-  if (reservePlaces.length > 0) {
+  // Tips
+  const hasTips = Object.values(state.tips).some(v => v.trim());
+  if (hasTips) {
     html += `
-    <div class="card" style="margin-top:20px">
-      <div class="card-title" style="font-size:16px">📌 예약 체크리스트</div>
-      <table style="margin-top:16px">
-        <thead><tr><th>장소</th><th>유형</th><th>예약 방법</th><th>확인</th></tr></thead>
-        <tbody>
-          ${reservePlaces.map(p => `
-          <tr>
-            <td class="place-cell">${p.name}</td>
-            <td><span class="type-badge type-${p.type}">${p.type}</span></td>
-            <td style="font-size:13px;color:var(--gray-600)">${p.reservationMethod || '직접 확인 필요'}</td>
-            <td><input type="checkbox" style="width:auto"></td>
-          </tr>`).join('')}
-        </tbody>
-      </table>
+    <div class="card" style="margin-top:18px">
+      <div class="card-title" style="font-size:16px">🧳 여행 준비 가이드</div>
+      <div class="tips-grid">
+        ${state.tips.weather   ? `<div class="tip-card"><h4>🌤 날씨·복장</h4><p>${state.tips.weather}</p></div>` : ''}
+        ${state.tips.currency  ? `<div class="tip-card"><h4>💴 환율·결제</h4><p>${state.tips.currency}</p></div>` : ''}
+        ${state.tips.transport ? `<div class="tip-card"><h4>🚇 교통카드·패스</h4><p>${state.tips.transport}</p></div>` : ''}
+        ${state.tips.language  ? `<div class="tip-card"><h4>🗣 언어·번역</h4><p>${state.tips.language}</p></div>` : ''}
+        ${state.tips.misc      ? `<div class="tip-card" style="grid-column:1/-1"><h4>💡 기타 팁</h4><p>${state.tips.misc}</p></div>` : ''}
+      </div>
     </div>`;
   }
 
@@ -1210,60 +1023,32 @@ function renderOutputStep() {
 }
 
 function copyText() {
-  const lines = [];
-  lines.push(`[${state.trip.destination} 여행 일정]`);
-  lines.push(`기간: ${formatDate(state.trip.startDate)} ~ ${formatDate(state.trip.endDate)}`);
-  lines.push('');
-
+  const lines = [`[${state.trip.destination} 여행 일정]`, `기간: ${formatDate(state.trip.startDate)} ~ ${formatDate(state.trip.endDate)}`, ''];
   const dates = dateRange(state.trip.startDate, state.trip.endDate);
   state.schedule.forEach((day, di) => {
     lines.push(`── ${getDayLabel(day.date, di, dates.length)} ──`);
     day.items.forEach(item => {
-      lines.push(`  ${item.time || item.bestTime || ''} | ${item.name} [${item.placeType}]${item.menu ? ' / ' + item.menu : ''}${item.nearStation ? ' (🚇' + item.nearStation + ')' : ''}`);
+      lines.push(`  ${item.bestTime||item.time||''} | ${item.name} [${item.placeType}]${item.menu ? ' / '+item.menu : ''}${item.nearStation ? ' 🚇'+item.nearStation : ''}`);
     });
     lines.push('');
   });
-
-  navigator.clipboard.writeText(lines.join('\n'))
-    .then(() => alert('클립보드에 복사되었습니다!'))
-    .catch(() => alert('복사 실패. 브라우저에서 직접 선택하여 복사해주세요.'));
+  navigator.clipboard.writeText(lines.join('\n')).then(() => alert('클립보드에 복사되었습니다!')).catch(() => alert('복사 실패. 직접 선택해 복사해주세요.'));
 }
 
-// ══════════════════════════════════════════════
-//  Core Render
-// ══════════════════════════════════════════════
-function v(id) {
-  const el = document.getElementById(id);
-  return el ? el.value : '';
-}
-
-function nextStep() {
-  state.currentStep = Math.min(state.currentStep + 1, STEPS.length - 1);
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function prevStep() {
-  state.currentStep = Math.max(state.currentStep - 1, 0);
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
+// ═══════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════
 function render() {
   renderProgress();
-  const container = document.getElementById('stepContainer');
-  const stepId = STEPS[state.currentStep].id;
-
-  if      (stepId === 'trip')     container.innerHTML = renderTripStep();
-  else if (stepId === 'places')   container.innerHTML = renderPlacesStep();
-  else if (stepId === 'details')  container.innerHTML = renderDetailsStep();
-  else if (stepId === 'schedule') container.innerHTML = renderScheduleStep();
-  else if (stepId === 'output')   container.innerHTML = renderOutputStep();
+  const id = STEPS[state.currentStep].id;
+  const c = document.getElementById('stepContainer');
+  if      (id === 'trip')     c.innerHTML = renderTripStep();
+  else if (id === 'places')   c.innerHTML = renderPlacesStep();
+  else if (id === 'details')  c.innerHTML = renderDetailsStep();
+  else if (id === 'schedule') c.innerHTML = renderScheduleStep();
+  else if (id === 'output')   c.innerHTML = renderOutputStep();
 }
 
-// ══════════════════════════════════════════════
-//  Init
-// ══════════════════════════════════════════════
 render();
 </script>
 </body>
